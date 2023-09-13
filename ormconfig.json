@@ -1,0 +1,21 @@
+{
+    "type": "postgres",
+    "host": "ep-misty-lab-50504202-pooler.us-east-1.postgres.vercel-storage.com",
+    "port": 5432,
+    "username": "default",
+    "password": "U5SxpuyiPFj6",
+    "database": "verceldb",
+    "ssl": {
+        "rejectUnauthorized": false
+    },
+    "synchronize": true,
+    "logging": true,
+    "entities": ["src/entity/*.ts"],
+    "migrations": ["src/migrations/*.ts"],
+    "subscribers": ["src/subscribers/*.ts"],
+    "cli": {
+    "entitiesDir": "src/entity",
+        "migrationsDir": "src/migrations",
+        "subscribersDir": "src/subscribers"
+}
+}
