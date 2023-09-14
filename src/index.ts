@@ -26,7 +26,6 @@ app.use(cors({
 }));
 createConnection()
     .then(() => {
-        const port = 5000;
 
         const server = http.createServer(app);
 
@@ -57,14 +56,16 @@ createConnection()
         // Utilisation du routeur pour les routes de message
         // const messageRouter = messageRoutes(io);
         // app.use('/message', messageRouter);
-        app.get('/', (req, res) => {
-            res.send('Hey this is my API running 🥳')
-          })
-        app.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
+        
     })
     .catch((error) => {
         console.error('Erreur de connexion à la base de données : ', error);
+    });
+    const port = 5000;
+    app.get('/', (req, res) => {
+        res.send('Hey this is my API running 🥳')
+      })
+    app.listen(port, () => {
+        console.log(`Serveur en cours d'exécution sur le port ${port}`);
     });
 module.exports = app
