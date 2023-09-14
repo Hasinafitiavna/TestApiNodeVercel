@@ -60,7 +60,7 @@ createConnection()
         app.get('/', (req, res) => {
             res.send('Hey this is my API running 🥳')
           })
-        server.listen(port, () => {
+        app.listen(port, () => {
             console.log(`Serveur en cours d'exécution sur le port ${port}`);
         });
     })
