@@ -54,12 +54,6 @@ async function startApp() {
             });
         });
 
-        // Utilisation du routeur pour les routes utilisateur
-        // app.use('/utilisateur', userRoutes);
-
-        // // Utilisation du routeur pour les routes de message
-        // const messageRouter = messageRoutes(io);
-        // app.use('/message', messageRouter);
         app.get('/', (req, res) => {
             res.send('Hey this is my API running 🥳')
           })
@@ -73,3 +67,4 @@ async function startApp() {
 }
 
 startApp();
+module.exports = app
