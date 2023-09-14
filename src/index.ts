@@ -55,11 +55,14 @@ async function startApp() {
         });
 
         // Utilisation du routeur pour les routes utilisateur
-        app.use('/utilisateur', userRoutes);
+        // app.use('/utilisateur', userRoutes);
 
-        // Utilisation du routeur pour les routes de message
-        const messageRouter = messageRoutes(io);
-        app.use('/message', messageRouter);
+        // // Utilisation du routeur pour les routes de message
+        // const messageRouter = messageRoutes(io);
+        // app.use('/message', messageRouter);
+        app.get('/', (req, res) => {
+            res.send('Hey this is my API running 🥳')
+          })
 
         server.listen(port, () => {
             console.log(`Serveur en cours d'exécution sur le port ${port}`);
