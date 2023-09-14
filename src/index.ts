@@ -28,45 +28,45 @@ app.use(cors({
 
 const port = 5000;
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
-const io = new Server(server, {
-    cors: {
-        origin: allowedOrigins,
-        methods: ['GET', 'POST'],
-    },
-});
+// const io = new Server(server, {
+//     cors: {
+//         origin: allowedOrigins,
+//         methods: ['GET', 'POST'],
+//     },
+// });
 
-io.on('connection', (socket) => {
-    console.log('Client connected');
+// io.on('connection', (socket) => {
+//     console.log('Client connected');
 
-    socket.on('sendMessage', (message) => {
-        // Enregistrez le message dans la base de données si nécessaire
-        // Puis émettez le message à tous les clients connectés
-        io.emit('newMessage', message);
-    });
+//     socket.on('sendMessage', (message) => {
+//         // Enregistrez le message dans la base de données si nécessaire
+//         // Puis émettez le message à tous les clients connectés
+//         io.emit('newMessage', message);
+//     });
 
-    socket.on('disconnect', () => {
-        console.log('Client disconnected');
-    });
-});
+//     socket.on('disconnect', () => {
+//         console.log('Client disconnected');
+//     });
+// });
 
 // Utilisation du routeur pour les routes utilisateur
-app.use('/utilisateur', userRoutes);
+// app.use('/utilisateur', userRoutes);
 app.use('/test', testRoutes);
 
 // Utilisation du routeur pour les routes de message
-const messageRouter = messageRoutes(io);
-app.use('/message', messageRouter);
+// const messageRouter = messageRoutes(io);
+// app.use('/message', messageRouter);
 
-app.get('/', (req, res) => {
-    res.send('Hey this is my API running 🥳');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hey this is my API running 🥳');
+// });
 
 // Connexion à la base de données
 createConnection()
     .then(() => {
-        server.listen(port, () => {
+        app.listen(port, () => {
             console.log(`Serveur en cours d'exécution sur le port ${port}`);
         });
     })
