@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import { Server } from 'socket.io';
 import http from 'http';
 import { messageRoutes } from './controller/MessageTestController'; // Importez la fonction messageRoutes
+import { testRoutes } from './controller/Test'; // Importez la fonction messageRoutes
 
 const app = express();
 app.use(bodyParser.json());
@@ -52,6 +53,7 @@ io.on('connection', (socket) => {
 
 // Utilisation du routeur pour les routes utilisateur
 app.use('/utilisateur', userRoutes);
+app.use('/test', testRoutes);
 
 // Utilisation du routeur pour les routes de message
 const messageRouter = messageRoutes(io);
