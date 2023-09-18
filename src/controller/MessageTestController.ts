@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { createConnection, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import { MessageTest } from "../entity/MessageTest";
 import { Server } from "socket.io";
 
@@ -8,12 +8,15 @@ const routerMessage = express.Router();
 // Injectez l'instance Socket.io dans le routeur
 export function messageRoutes(io: Server) {
     // Route pour récupérer tous les messages
-    createConnection()
-    .then(() => {
     routerMessage.get("/getAllMessage", async (req: Request, res: Response) => {
-        const messageRepository = getRepository(MessageTest);
-        const messages = await messageRepository.find();
-        return res.json(messages);
+        try {
+            const messageRepository = getRepository(MessageTest);
+            const messages = await messageRepository.find();
+            return res.json(messages);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des messages : ', error);
+            return res.status(500).json({ error: 'Erreur lors de la récupération des messages' });
+        }
     });
 
     // Route pour ajouter un nouveau message
@@ -24,9 +27,8 @@ export function messageRoutes(io: Server) {
         newMessage.idutilisateurecoie = idutilisateurecoie;
         newMessage.message = message;
 
-        const messageRepository = getRepository(MessageTest);
-
         try {
+            const messageRepository = getRepository(MessageTest);
             // Enregistrez le message dans la base de données
             await messageRepository.save(newMessage);
 
@@ -39,9 +41,6 @@ export function messageRoutes(io: Server) {
             return res.status(500).json({ error: 'Erreur lors de l\'enregistrement du message' });
         }
     });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
+
     return routerMessage;
 }
