@@ -49,7 +49,10 @@ io.on('connection', (socket) => {
         console.log('Client disconnected');
     });
 });
-
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  });
 // Utilisation du routeur pour les routes utilisateur
 // app.use('/utilisateur', userRoutes);
 app.use('/test', testRoutes);
