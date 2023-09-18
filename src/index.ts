@@ -62,12 +62,12 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données (une seule fois au démarrage de l'application)
-createConnection()
-    .then(() => {
-        server.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
+// createConnection()
+//     .then(() => {
+//         server.listen(port, () => {
+//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//         });
+//     })
+//     .catch((error) => {
+//         console.error('Erreur de connexion à la base de données : ', error);
+//     });
