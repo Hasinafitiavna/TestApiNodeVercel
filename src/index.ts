@@ -7,8 +7,7 @@ import bodyParser from 'body-parser';
 import { Server } from 'socket.io';
 import http from 'http';
 import { messageRoutes } from './controller/MessageTestController'; // Importez la fonction messageRoutes
-import { testRoutes } from './controller/Test'; // Importez la fonction messageRoutes
-
+import testRoutes from './controller/Test'
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,50 +27,50 @@ app.use(cors({
 
 const port = 5000;
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: allowedOrigins,
-//         methods: ['GET', 'POST'],
-//     },
-// });
+const io = new Server(server, {
+    cors: {
+        origin: allowedOrigins,
+        methods: ['GET', 'POST'],
+    },
+});
 
-// io.on('connection', (socket) => {
-//     console.log('Client connected');
+io.on('connection', (socket) => {
+    console.log('Client connected');
 
-//     socket.on('sendMessage', (message) => {
-//         // Enregistrez le message dans la base de données si nécessaire
-//         // Puis émettez le message à tous les clients connectés
-//         io.emit('newMessage', message);
-//     });
+    socket.on('sendMessage', (message) => {
+        // Enregistrez le message dans la base de données si nécessaire
+        // Puis émettez le message à tous les clients connectés
+        io.emit('newMessage', message);
+    });
 
-//     socket.on('disconnect', () => {
-//         console.log('Client disconnected');
-//     });
-// });
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
 
 // Utilisation du routeur pour les routes utilisateur
 // app.use('/utilisateur', userRoutes);
 app.use('/test', testRoutes);
 
 // Utilisation du routeur pour les routes de message
-// const messageRouter = messageRoutes(io);
-// app.use('/message', messageRouter);
+const messageRouter = messageRoutes(io);
+app.use('/message', messageRouter);
 
-// app.get('/', (req, res) => {
-//     res.send('Hey this is my API running 🥳');
-// });
+app.get('/', (req, res) => {
+    res.send('Hey this is my API running 🥳');
+});
 
 // Connexion à la base de données
-createConnection()
-    .then(() => {
-        app.listen(port, () => {
+// createConnection()
+//     .then(() => {
+        server.listen(port, () => {
             console.log(`Serveur en cours d'exécution sur le port ${port}`);
         });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
+    // })
+    // .catch((error) => {
+    //     console.error('Erreur de connexion à la base de données : ', error);
+    // });
 
 module.exports = app;

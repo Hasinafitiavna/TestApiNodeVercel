@@ -5,7 +5,6 @@ import {Utilisateur} from "../entity/Utilisateur";
 const router = express.Router();
 
 router.get("/getAllUtilisateur", async (req: Request, res: Response) => {
-
     const userRepository = getRepository(Utilisateur);
     const users = await userRepository.find();
     console.log(users.length)
