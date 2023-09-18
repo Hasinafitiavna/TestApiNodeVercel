@@ -73,5 +73,5 @@ app.get('/', (req, res) => {
     //     console.error('Erreur de connexion à la base de données : ', error);
     // });
 
-module.exports = app;
-module.exports = server;
+// module.exports = app;
+// module.exports = server;
