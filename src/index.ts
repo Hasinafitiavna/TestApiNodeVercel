@@ -66,15 +66,15 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-// createConnection()
-//     .then(() => {
+createConnection()
+    .then(() => {
         server.listen(port, () => {
             console.log(`Serveur en cours d'exécution sur le port ${port}`);
         });
-    // })
-    // .catch((error) => {
-    //     console.error('Erreur de connexion à la base de données : ', error);
-    // });
+    })
+    .catch((error) => {
+        console.error('Erreur de connexion à la base de données : ', error);
+    });
 
 // module.exports = app;
 // module.exports = server;
