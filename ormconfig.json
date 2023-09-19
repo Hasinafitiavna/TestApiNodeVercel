@@ -5,6 +5,9 @@
     "username": "default",
     "password": "U5SxpuyiPFj6",
     "database": "verceldb",
+    "ssl": {
+        "rejectUnauthorized": false
+    },
     "synchronize": true,
     "logging": true,
     "entities": ["src/entity/*.ts"],
