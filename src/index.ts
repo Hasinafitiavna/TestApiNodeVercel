@@ -62,36 +62,36 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-createConnection()
-    .then(() => {
-        server.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
-
-//    createConnection({
-//             type: "postgres",
-//             host: "ep-misty-lab-50504202-pooler.us-east-1.postgres.vercel-storage.com",
-//             port :5432,
-//             username: 'default',
-//             password: 'U5SxpuyiPFj6',
-//             database: 'verceldb',
-//             ssl: {
-//                 "rejectUnauthorized": false
-//             }, 
-//             entities: ["src/entity/*.ts"],
-//             synchronize: true, // À utiliser en développement uniquement
-          
-//         }).then(()=>{
-//             server.listen(port, () => {
-//                 console.log(`Serveur en cours d'exécution sur le port ${port}`);
-//             });
-//         })
-//     .catch((error) =>{
-//         console.error('unable to connect to postgres')
+// createConnection()
+//     .then(() => {
+//         server.listen(port, () => {
+//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//         });
 //     })
+//     .catch((error) => {
+//         console.error('Erreur de connexion à la base de données : ', error);
+//     });
+
+   createConnection({
+            type: "postgres",
+            host: "ep-misty-lab-50504202-pooler.us-east-1.postgres.vercel-storage.com",
+            port :5432,
+            username: 'default',
+            password: 'U5SxpuyiPFj6',
+            database: 'verceldb',
+            ssl: {
+                "rejectUnauthorized": false
+            }, 
+            entities: ["entity/*.ts"],
+            synchronize: true, // À utiliser en développement uniquement
+          
+        }).then(()=>{
+            server.listen(port, () => {
+                console.log(`Serveur en cours d'exécution sur le port ${port}`);
+            });
+        })
+    .catch((error) =>{
+        console.error('unable to connect to postgres')
+    })
 // module.exports = app;
 // module.exports = server;
