@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     });
 });
 // Utilisation du routeur pour les routes utilisateur
-// app.use('/utilisateur', userRoutes);
+app.use('/utilisateur', userRoutes);
 app.use('/test', testRoutes);
 
 // Utilisation du routeur pour les routes de message

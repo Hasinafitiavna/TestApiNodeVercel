@@ -15,7 +15,7 @@ export function messageRoutes(io: Server) {
             return res.json(messages);
         } catch (error) {
             console.error('Erreur lors de la récupération des messages : ', error);
-            return res.status(500).json({ error: 'Erreur lors de la récupération des messages',e:error,lasa:'lasa' });
+            return res.status(500).json({ error: 'Erreur lors de la récupération des messages',e:error });
         }
     });
 
