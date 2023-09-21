@@ -105,7 +105,7 @@ app.get('/', (req, res) => {
             ssl: {
                 "rejectUnauthorized": false
             }, 
-            entities: ["src/entity/*.ts"],
+            entities: ["./entity/*.ts"],
             synchronize: true, // À utiliser en développement uniquement
           
         }).then(()=>{
