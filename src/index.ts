@@ -103,7 +103,7 @@ app.get('/', (req, res) => {
             password: process.env.DATABASE_PASSWORD,
             database: process.env.DATABASE_DATABASE,
             ssl: {
-                "rejectUnauthorized": false
+                rejectUnauthorized: false
             }, 
             entities: ["src/entity/*.ts"],
             synchronize: true, // À utiliser en développement uniquement
