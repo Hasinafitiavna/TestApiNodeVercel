@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+import { createConnection, ConnectionOptions } from 'typeorm';
 import express from 'express';
 import cors from 'cors';
 import 'reflect-metadata';
@@ -9,6 +9,8 @@ import http from 'http';
 import { messageRoutes } from './controller/MessageTestController'; // Importez la fonction messageRoutes
 import testRoutes from './controller/Test'
 const app = express();
+import dotenv from 'dotenv';
+dotenv.config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -25,7 +27,7 @@ app.use(cors({
     },
 }));
 
-const port = 5000;
+const port = process.env.PORT||5000;
 
 const server = http.createServer(app);
 
@@ -71,14 +73,35 @@ createConnection()
     .catch((error) => {
         console.error('Erreur de connexion à la base de données : ', error);
     });
+// const dbOptions: ConnectionOptions = {
+//     type: 'postgres',
+//     url: process.env.DATABASE_URL, // Utilisez la variable d'environnement DATABASE_URL
+//     synchronize: true,
+//     logging: true,
+//     entities: ['src/entity/*.ts'],
+//     ssl: {
+//         "rejectUnauthorized": false
+//     },
+//   };
+  
+//   // Connexion à la base de données
+//   createConnection(dbOptions)
+//     .then(() => {
+//       server.listen(port, () => {
+//         console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//       });
+//     })
+//     .catch((error) => {
+//       console.error('Erreur de connexion à la base de données : ', error);
+//     });
 
 //    createConnection({
 //             type: "postgres",
-//             host: "ep-misty-lab-50504202-pooler.us-east-1.postgres.vercel-storage.com",
+//             host: process.env.POSTGRES_HOST,
 //             port :5432,
-//             username: 'default',
-//             password: 'U5SxpuyiPFj6',
-//             database: 'verceldb',
+//             username: process.env.POSTGRES_USERNAME,
+//             password: process.env.POSTGRES_PASSWORD,
+//             database: process.env.POSTGRES_DATABASE,
 //             ssl: {
 //                 "rejectUnauthorized": false
 //             }, 
