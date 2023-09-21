@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import { MessageTest } from "../entity/MessageTest";
 import { Server } from "socket.io";
+import { MessageTest } from "src/entity/MessageTest";
 
 const routerMessage = express.Router();
 
