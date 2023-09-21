@@ -27,7 +27,7 @@ app.use(cors({
     },
 }));
 
-const port = 5000;
+const port = process.env.PORT||5000;
 
 const server = http.createServer(app);
 
@@ -64,15 +64,15 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-// createConnection()
-//     .then(() => {
-//         server.listen(port, () => {
-//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
-//         });
-//     })
-//     .catch((error) => {
-//         console.error('Erreur de connexion à la base de données : ', error);
-//     });
+createConnection()
+    .then(() => {
+        server.listen(port, () => {
+            console.log(`Serveur en cours d'exécution sur le port ${port}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Erreur de connexion à la base de données : ', error);
+    });
 // const dbOptions: ConnectionOptions = {
 //     type: 'postgres',
 //     url: process.env.DATABASE_URL, // Utilisez la variable d'environnement DATABASE_URL
@@ -95,26 +95,26 @@ app.get('/', (req, res) => {
 //       console.error('Erreur de connexion à la base de données : ', error);
 //     });
 
-   createConnection({
-            type: "postgres",
-            host: process.env.POSTGRES_HOST,
-            port :5432,
-            username: process.env.POSTGRES_USERNAME,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DATABASE,
-            ssl: {
-                "rejectUnauthorized": false
-            }, 
-            entities: ["src/entity/*.ts"],
-            synchronize: true, // À utiliser en développement uniquement
+//    createConnection({
+//             type: "postgres",
+//             host: process.env.POSTGRES_HOST,
+//             port :5432,
+//             username: process.env.POSTGRES_USERNAME,
+//             password: process.env.POSTGRES_PASSWORD,
+//             database: process.env.POSTGRES_DATABASE,
+//             ssl: {
+//                 "rejectUnauthorized": false
+//             }, 
+//             entities: ["src/entity/*.ts"],
+//             synchronize: true, // À utiliser en développement uniquement
           
-        }).then(()=>{
-            server.listen(port, () => {
-                console.log(`Serveur en cours d'exécution sur le port ${port}`);
-            });
-        })
-    .catch((error) =>{
-        console.error('unable to connect to postgres')
-    })
+//         }).then(()=>{
+//             server.listen(port, () => {
+//                 console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//             });
+//         })
+//     .catch((error) =>{
+//         console.error('unable to connect to postgres')
+//     })
 // module.exports = app;
 // module.exports = server;
