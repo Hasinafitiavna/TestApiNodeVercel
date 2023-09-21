@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+import { createConnection, ConnectionOptions } from 'typeorm';
 import express from 'express';
 import cors from 'cors';
 import 'reflect-metadata';
@@ -9,6 +9,8 @@ import http from 'http';
 import { messageRoutes } from './controller/MessageTestController'; // Importez la fonction messageRoutes
 import testRoutes from './controller/Test'
 const app = express();
+import dotenv from 'dotenv';
+dotenv.config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -62,36 +64,57 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-createConnection()
-    .then(() => {
-        server.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
-
-//    createConnection({
-//             type: "postgres",
-//             host: "ep-misty-lab-50504202-pooler.us-east-1.postgres.vercel-storage.com",
-//             port :5432,
-//             username: 'default',
-//             password: 'U5SxpuyiPFj6',
-//             database: 'verceldb',
-//             ssl: {
-//                 "rejectUnauthorized": false
-//             }, 
-//             entities: ["src/entity/*.ts"],
-//             synchronize: true, // À utiliser en développement uniquement
-          
-//         }).then(()=>{
-//             server.listen(port, () => {
-//                 console.log(`Serveur en cours d'exécution sur le port ${port}`);
-//             });
-//         })
-//     .catch((error) =>{
-//         console.error('unable to connect to postgres')
+// createConnection()
+//     .then(() => {
+//         server.listen(port, () => {
+//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//         });
 //     })
+//     .catch((error) => {
+//         console.error('Erreur de connexion à la base de données : ', error);
+//     });
+// const dbOptions: ConnectionOptions = {
+//     type: 'postgres',
+//     url: process.env.DATABASE_URL, // Utilisez la variable d'environnement DATABASE_URL
+//     synchronize: true,
+//     logging: true,
+//     entities: ['src/entity/*.ts'],
+//     ssl: {
+//         "rejectUnauthorized": false
+//     },
+//   };
+  
+//   // Connexion à la base de données
+//   createConnection(dbOptions)
+//     .then(() => {
+//       server.listen(port, () => {
+//         console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//       });
+//     })
+//     .catch((error) => {
+//       console.error('Erreur de connexion à la base de données : ', error);
+//     });
+
+   createConnection({
+            type: "postgres",
+            host: process.env.DATABASE_HOST,
+            port :5432,
+            username: process.env.DATABASE_USERNAME,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE_DATABASE,
+            ssl: {
+                "rejectUnauthorized": false
+            }, 
+            entities: ["src/entity/*.ts"],
+            synchronize: true, // À utiliser en développement uniquement
+          
+        }).then(()=>{
+            server.listen(port, () => {
+                console.log(`Serveur en cours d'exécution sur le port ${port}`);
+            });
+        })
+    .catch((error) =>{
+        console.error('unable to connect to postgres')
+    })
 // module.exports = app;
 // module.exports = server;
