@@ -29,7 +29,7 @@ app.use(cors({
     },
 }));
 
-const port = process.env.PORT||4000;
+const port = process.env.PORT||5000;
 
 const server = http.createServer(app);
 
