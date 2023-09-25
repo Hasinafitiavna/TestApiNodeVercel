@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "installCommand": "npm install",
   "builds": [
     {
       "src": "src/index.ts",
@@ -8,23 +9,8 @@
   ],
   "routes": [
     {
-      "src": "/utilisateur/(.*)",
-      "dest": "/src/index.ts"
-    },
-    {
-      "src": "/test/(.*)",
-      "dest": "/src/index.ts"
-    },
-    {
-      "src": "/message/(.*)",
-      "dest": "/src/index.ts"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/src/index.ts"
+      "dest": "src/index.ts"
     }
-  ],
-  "env": {
-    "PORT": 4000
-  }
+  ]
 }
