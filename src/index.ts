@@ -66,15 +66,15 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-createConnection()
-    .then(() => {
-        server.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
+// createConnection()
+//     .then(() => {
+//         server.listen(port, () => {
+//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//         });
+//     })
+//     .catch((error) => {
+//         console.error('Erreur de connexion à la base de données : ', error);
+//     });
 // const dbOptions: ConnectionOptions = {
 //     type: 'postgres',
 //     url: process.env.DATABASE_URL, // Utilisez la variable d'environnement DATABASE_URL
