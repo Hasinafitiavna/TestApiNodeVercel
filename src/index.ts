@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Utilisez le middleware CORS pour permettre les requêtes depuis votre client React
-const allowedOrigins = ['https://message-front.vercel.app', 'http://localhost:3000','https://a245-41-188-46-8.ngrok-free.app'];
+const allowedOrigins = ['https://message-front.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
     origin: function (origin, callback) {
