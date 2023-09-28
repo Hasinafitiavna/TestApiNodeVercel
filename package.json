@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"ts-node-dev --respawn --transpile-only src/index.ts\""
+    "test": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"ts-node-dev --respawn --transpile-only src/index.ts\"",
+    "testa": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "repository": {
     "type": "git",
