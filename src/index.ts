@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Utilisez le middleware CORS pour permettre les requêtes depuis votre client React
-const allowedOrigins = ['https://message-front.vercel.app', 'http://localhost:3000','https://a245-41-188-46-8.ngrok-free.app'];
+const allowedOrigins = ['https://message-front.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -29,7 +29,7 @@ app.use(cors({
     },
 }));
 
-const port = process.env.PORT||4000;
+const port = process.env.PORT||5000;
 
 const server = http.createServer(app);
 
@@ -66,15 +66,15 @@ app.get('/', (req, res) => {
 });
 
 // Connexion à la base de données
-createConnection()
-    .then(() => {
-        server.listen(port, () => {
-            console.log(`Serveur en cours d'exécution sur le port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Erreur de connexion à la base de données : ', error);
-    });
+// createConnection()
+//     .then(() => {
+//         server.listen(port, () => {
+//             console.log(`Serveur en cours d'exécution sur le port ${port}`);
+//         });
+//     })
+//     .catch((error) => {
+//         console.error('Erreur de connexion à la base de données : ', error);
+//     });
 // const dbOptions: ConnectionOptions = {
 //     type: 'postgres',
 //     url: process.env.DATABASE_URL, // Utilisez la variable d'environnement DATABASE_URL
